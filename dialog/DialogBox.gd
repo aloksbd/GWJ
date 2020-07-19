@@ -10,8 +10,7 @@ var dialog_index = 0
 var finished = false
 
 func _ready():
-	visible = false
-	#load_dialog()
+	load_dialog()
 
 func _process(delta):
 	$"next-indicator".visible = finished

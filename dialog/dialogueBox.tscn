@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://dialog/dialog-background.png" type="Texture" id=1]
+[ext_resource path="res://dialog/GaramondPremrPro-Smbd.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://dialog/next-indicator.png" type="Texture" id=3]
+[ext_resource path="res://dialog/DialogBox.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "IDLE"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 700, 88 ), Vector2( 700, 93 ) ]
+}
+
+[node name="DialogBox" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -380.0
+margin_right = 378.0
+margin_bottom = 126.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 52.0
+margin_top = 17.0
+margin_right = -54.0
+margin_bottom = -18.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.333333, 0.227451, 0.0862745, 1 )
+bbcode_enabled = true
+bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next-indicator" type="Sprite" parent="."]
+position = Vector2( 700, 88 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="next-indicator"]
+autoplay = "IDLE"
+anims/IDLE = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
