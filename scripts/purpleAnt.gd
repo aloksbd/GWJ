@@ -24,25 +24,18 @@ func _physics_process(delta):
 	else:
 		$AnimationPlayer.play("idle")
 		motion.x = 0
-	motion =  move_and_slide(motion,UP)
+	#motion = move_and_slide(motion,UP)
+	move_and_slide(motion )
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if "sugar" in collision.collider.name:
+			collision.collider.move_and_slide(motion)
 	
 func _process(delta):
 	if canShoot && Input.is_action_just_pressed("ui_throwSugar"):
 		
 		var sugar = sugar_scene.instance()
 		sugar.position = $sugarSpawner.global_position
-		sugar.shootTo($Sprite.flip_h)
-		get_parent().add_child(sugar)
-		canShoot = false
-		yield(get_tree().create_timer(0.3), "timeout")
-		canShoot = true
-
-	if canShoot && Input.is_action_just_pressed("ui_placeAndStandOverSugar"):
-		
-		var sugar = sugar_scene.instance()
-		sugar.position = global_position
-		self.position.x = sugar.global_position.x
-		position.y = sugar.global_position.y-48
 		#sugar.shootTo($Sprite.flip_h)
 		get_parent().add_child(sugar)
 		canShoot = false

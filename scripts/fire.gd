@@ -24,6 +24,6 @@ func _physics_process(delta):
 	translate(velocity)
 
 func _on_fire_body_entered(body):
-	if "neo" in body.name:
+	if "purple" in body.name:
 		#body.hit()
 		queue_free()

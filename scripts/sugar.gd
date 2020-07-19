@@ -12,13 +12,6 @@ func _physics_process(delta):
 	motion =  move_and_slide(motion,UP)
 
 
-func shootTo(left):
-	if left:
-		motion.x = -SPEED
-	else:
-		motion.x = SPEED
-
-
 func _on_eatingArea_body_entered(body):
 	if "red" in body.name:
 		body.eatSugar()
