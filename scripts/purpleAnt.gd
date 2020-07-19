@@ -3,10 +3,10 @@ extends KinematicBody2D
 const UP = Vector2(0,-1)
 const SPEED = 100
 const ACCELERATION = 25
-const GRAVITY = 10
+const GRAVITY = 5
 var motion = Vector2()
 var canShoot = true
-var newArr
+var newArr = []
 
 onready var sugar_scene = preload("res://scenes/sugar.tscn")
 
@@ -31,7 +31,7 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if "sugar" in collision.collider.name:
 			if collision.position.y > position.y:
-				print("Do nothing")
+				return
 			else:
 				collision.collider.move_and_slide(motion)
 	
@@ -40,10 +40,9 @@ func _process(delta):
 	
 	
 	if canShoot && Input.is_action_just_pressed("ui_throwSugar"):
-		var x = $sugarSpawner/Area2D.get_overlapping_areas()
-		if(x.size() > 0):
-			newArr = $sugarSpawner/Area2D.get_overlapping_areas()
-			
+		
+		print(newArr.size())
+		if(newArr.size() > 0):
 			print(newArr[0].get_parent())
 			self.position.x = newArr[0].global_position.x
 			position.y = newArr[0].global_position.y-48
@@ -56,3 +55,15 @@ func _process(delta):
 			yield(get_tree().create_timer(0.3), "timeout")
 			canShoot = true
 			
+
+
+func _on_Area2D_area_entered(area):
+	newArr.append(area)
+	print("Got here in area entered")
+
+
+func _on_Area2D_area_exited(area):
+	newArr.clear()
+	print("Got here in area exited")
+	print("array size is: ")
+	print(newArr.size())
