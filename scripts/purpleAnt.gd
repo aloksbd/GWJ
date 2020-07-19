@@ -6,6 +6,7 @@ const ACCELERATION = 25
 const GRAVITY = 10
 var motion = Vector2()
 var canShoot = true
+var newArr
 
 onready var sugar_scene = preload("res://scenes/sugar.tscn")
 
@@ -32,8 +33,14 @@ func _physics_process(delta):
 			collision.collider.move_and_slide(motion)
 	
 func _process(delta):
+	
+	
+	
 	if canShoot && Input.is_action_just_pressed("ui_throwSugar"):
-		
+		#if($sugarSpawner/Area2D.get_overlapping_areas().size() > 0):
+		#	newArr = $sugarSpawner/Area2D.get_overlapping_areas()
+		#	print(newArr[0].get_parent().get_child(5))
+		#else
 		var sugar = sugar_scene.instance()
 		sugar.position = $sugarSpawner.global_position
 		#sugar.shootTo($Sprite.flip_h)
@@ -41,3 +48,5 @@ func _process(delta):
 		canShoot = false
 		yield(get_tree().create_timer(0.3), "timeout")
 		canShoot = true
+		self.position.x = sugar.global_position.x
+		position.y = sugar.global_position.y-48
