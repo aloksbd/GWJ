@@ -62,6 +62,7 @@ func shoot():
 
 func _on_sensor_body_entered(body):
 	if "purple" in body.name:
+		get_parent().get_node("CanvasLayer/Control/DialogBox").load_dialog()
 		antDetected = true
 		if !sugarDetected:
 			shoot()
