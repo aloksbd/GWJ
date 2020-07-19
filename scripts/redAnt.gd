@@ -85,4 +85,5 @@ func eatSugar():
 func finishEating():
 	eating = false
 	sugarDetected = false
+	changeDirection()
 	$CollisionShape2D.set_deferred("disabled", false)
