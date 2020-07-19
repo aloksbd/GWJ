@@ -16,7 +16,11 @@ _global_script_class_icons={
 [application]
 
 config/name="GWJ#23"
+<<<<<<< HEAD
 run/main_scene="res://scenes/menu.tscn"
+=======
+run/main_scene="res://scenes/MainLevel.tscn"
+>>>>>>> d3f7a81884b34f7bcb95716980271785b4023d22
 config/icon="res://icon.png"
 
 [display]
